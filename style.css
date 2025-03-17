@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background:#222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.weather-container {
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(to bottom, #4facfe, #00f2fe);
+    color: #fff;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.search-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 50px;
+    border-radius: 25px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 16px;
+}
+
+.search-box button {
+    border: none;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.search-box img {
+    width: 16px;
+}
+
+.weather-box img {
+
+    width: 150px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.weather-icon {
+    width: 150px;
+}
+
+.weather-box h1 {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.weather-box h2 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    margin-top: 20px;
+}
+
+.coln1, .coln2 {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.coln1 img, .coln2 img {
+    width: 40px;
+}
+
+
+.humidity, .wind {
+    font-size: 20px;
+    font-weight: 600;
+}
+.custom-weather-image{
+display: none;
+}
