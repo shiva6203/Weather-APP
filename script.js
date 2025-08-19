@@ -1,55 +1,39 @@
-const apiKey = "3cf19694ab240f9b35bc45b9dcc9d699";
+const url =
+	'https://api.openweathermap.org/data/2.5/weather';
+const apiKey =
+	'f00c38e0279b7bc85480c3fe775d518c';
 
-async function getWeather() {
-    const city = document.getElementById("city").value.trim();
-    if (city === "") {
-        alert("Please enter a city name.");
-        return;
-    }
+$(document).ready(function () {
+	weatherFn('Hyderabad');
+});
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=hyderabad &units=metric`;
+async function weatherFn(cName) {
+	const temp =
+		`${url}?q=${cName}&appid=${apiKey}&units=metric`;
+	try {
+		const res = await fetch(temp);
+		const data = await res.json();
+		if (res.ok) {
+			weatherShowFn(data);
+		} else {
+			alert('City not found. Please try again.');
+		}
+	} catch (error) {
+		console.error('Error fetching weather data:', error);
+	}
+}
 
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error("City not found");
-        }
-        
-        const data = await response.json();
+function weatherShowFn(data) {
+	$('#city-name').text(data.name);
+	$('#date').text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+	$('#temperature').html(`${data.main.temp}°C`);
+	$('#description').text(data.weather[0].description);
+	$('#wind-speed').html(`Wind Speed: ${data.wind.speed} m/s`);
 
-        document.getElementById("city-name").innerHTML = `City: ${data.name}`;
-        document.getElementById("temperature").innerHTML = `Temperature: ${data.main.temp}°C`;
-        document.getElementById("humidity").innerHTML = `Humidity: ${data.main.humidity}%`;
-        document.getElementById("wind-speed").innerHTML = `Wind: ${data.wind.speed} km/h`;
-        
-        document.getElementById("weather-icon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
-        
-        const weatherMain = data.weather[0].main.toLowerCase();
-        let imagePath = "";
+	const iconCode = data.weather[0].icon;
+	const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-        switch (weatherMain) {
-            case "clear":
-                imagePath = "images/clear.png";
-                break;
-            case "clouds":
-                imagePath = "images/clouds.png";
-                break;
-            case "rain":
-                imagePath = "images/rain.png";
-                break;
-            case "snow":
-                imagePath = "images/snow.png";
-                break;
-            case "mist":
-                imagePath = "images/mist.png";
-                break;
-            default:
-                imagePath = "images/default.png";
-        }
+	$('#weather-icon').attr('src', iconUrl);
 
-        document.getElementById("custom-weather-image").src = imagePath;
-
-    } catch (error) {
-        alert(error.message);
-    }
+	$('#weather-info').fadeIn();
 }
